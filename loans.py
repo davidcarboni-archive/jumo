@@ -112,7 +112,6 @@ class LoanAggregator:
 
         print(json.dumps(self.data))
 
-
     def count(self, network, product, month):
         count = 0
         if network in self.data:
