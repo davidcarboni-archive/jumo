@@ -14,7 +14,7 @@ class TestLoans(unittest.TestCase):
 
         # Given
         # A data file
-        filename = "data/Loans.csv"
+        filename = "data/Test.csv"
         loanAggregator = loans.LoanAggregator()
 
         # When
@@ -132,7 +132,7 @@ class TestLoans(unittest.TestCase):
 
         # Given
         # A data file
-        filename = "data/Loans.csv"
+        filename = "data/Test.csv"
         loanAggregator = loans.LoanAggregator()
         expected = {
             'Network 1': {

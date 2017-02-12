@@ -6,7 +6,7 @@ class LoanAggregator:
     """This class processes CSV input files"""
 
     # Dict to hold CSV data
-    data = {}
+    data = None
 
     # Header information
     header = None
@@ -22,6 +22,9 @@ class LoanAggregator:
     date = -1
     product = -1
     amount = -1
+
+    def __init__(self):
+        self.data = {}
 
     def read_input(self, filename):
         """Reads an input CSV and processes the rows
@@ -41,13 +44,14 @@ class LoanAggregator:
                         self.header = row
                         #print("Loaded header row: " + repr(self.header))
                         #print(len(self.header))
-                        self.__index_headers(row)
+                        self._index_headers(row)
                     else:
-                        self.__process_row(row)
+                        self._process_row(row)
             except csv.Error as e:
                 sys.exit('file {}, line {}: {}'.format(filename, reader.line_num, e))
+        #print(json.dumps(self.data))
 
-    def __index_headers(self, header):
+    def _index_headers(self, header):
         """Determine the indices of the expected column headers in each row.
 
         This isn't strictly required if the input file format is known and does not change.
@@ -72,7 +76,7 @@ class LoanAggregator:
         # NB we could raise a value error here if any of the heading indices
         # have not been updated from -1
 
-    def __process_row(self, row):
+    def _process_row(self, row):
         """ Aggregates the data from a single row.
 
         This method could check the length of an incoming CSV row, however if we assume that data files
@@ -94,7 +98,6 @@ class LoanAggregator:
         network = row[self.network]
         product = row[self.product]
         date = row[self.date]
-        print(date)
         month =date[3:6]
         amount = row[self.amount]
 
@@ -110,8 +113,6 @@ class LoanAggregator:
         self.data[network][product][month]["count"] += 1
         self.data[network][product][month]["total"] += int(float(amount))
 
-        print(json.dumps(self.data))
-
     def count(self, network, product, month):
         count = 0
         if network in self.data:
@@ -121,7 +122,12 @@ class LoanAggregator:
         return count
 
     def total(self, network, product, month):
-        return 0
+        total = 0
+        if network in self.data:
+            if product in self.data[network]:
+                if month in self.data[network][product]:
+                    total = self.data[network][product][month]["total"]
+        return total
 
 
 if __name__ == '__main__':
@@ -130,4 +136,5 @@ if __name__ == '__main__':
 
     loanAggregator = LoanAggregator()
     loanAggregator.read_input("data/loans.csv")
+    print(json.dumps(loanAggregator.data))
 
