@@ -55,7 +55,7 @@ class TestLoans(unittest.TestCase):
                     'Apr': 0
                 },
                 'Loan Product 2': {
-                    'Mar': 0,
+                    'Mar': 1,
                     'Apr': 1
                 },
                 'Loan Product 3': {

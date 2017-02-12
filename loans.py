@@ -114,7 +114,12 @@ class LoanAggregator:
 
 
     def count(self, network, product, month):
-        return 0
+        count = 0
+        if network in self.data:
+            if product in self.data[network]:
+                if month in self.data[network][product]:
+                    count = self.data[network][product][month]["count"]
+        return count
 
     def total(self, network, product, month):
         return 0
