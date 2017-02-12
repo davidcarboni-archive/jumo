@@ -1,0 +1,52 @@
+{
+   "Network 1":{
+      "Loan Product 1":{
+         "Mar":1000,
+         "Apr":0
+      },
+      "Loan Product 2":{
+         "Mar":3098,
+         "Apr":3000
+      },
+      "Loan Product 3":{
+         "Mar":0,
+         "Apr":0
+      }
+   },
+   "Network 2":{
+      "Loan Product 1":{
+         "Mar":1122,
+         "Apr":5671
+      },
+      "Loan Product 2":{
+         "Mar":0,
+         "Apr":0
+      },
+      "Loan Product 3":{
+         "Mar":0,
+         "Apr":1747
+      }
+   },
+   "Network 3":{
+      "Loan Product 1":{
+         "Mar":0,
+         "Apr":0
+      },
+      "Loan Product 2":{
+         "Mar":2084,
+         "Apr":0
+      },
+      "Loan Product 3":{
+         "Mar":0,
+         "Apr":1928
+      },
+      "Loan Product 4":{
+         "Mar":0
+      }
+   },
+   "Network 4":{
+      "Loan Product 1":{
+         "Mar":0
+      }
+   }
+}

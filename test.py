@@ -1,5 +1,6 @@
 import unittest
 import loans
+import json
 
 
 class TestLoans(unittest.TestCase):
@@ -42,67 +43,17 @@ class TestLoans(unittest.TestCase):
         The data/Test.csv file has been tweaked to duplicate the last line of data/Loans.csv so that we can demonstrate
         a count greater than one.
 
-        This test is coded based on the data in the test file. It could be made more adaptable because currently
-        you'd have to know to keep this code in sync with the test file and splitting the job between two files
-        is at best a drag and at worst creates an opportunity for error.
+        This test uses the expected values in Test_counts.json. It could be made more adaptable because currently
+        you'd have to know to keep the json in sync with the csv file. Splitting the job between two files is at
+        best a drag and at worst creates an opportunity for error, so it would be nice to move to a neater solution.
         """
 
         # Given
         # A data file
         filename = "data/Test.csv"
         loanAggregator = loans.LoanAggregator()
-        expected = {
-            'Network 1': {
-                'Loan Product 1': {
-                    'Mar': 1,
-                    'Apr': 0
-                },
-                'Loan Product 2': {
-                    'Mar': 1,
-                    'Apr': 2
-                },
-                'Loan Product 3': {
-                    'Mar': 0,
-                    'Apr': 0
-                }
-            },
-            'Network 2': {
-                'Loan Product 1': {
-                    'Mar': 1,
-                    'Apr': 1
-                },
-                'Loan Product 2': {
-                    'Mar': 0,
-                    'Apr': 0
-                },
-                'Loan Product 3': {
-                    'Mar': 0,
-                    'Apr': 1
-                }
-            },
-            'Network 3': {
-                'Loan Product 1': {
-                    'Mar': 0,
-                    'Apr': 0
-                },
-                'Loan Product 2': {
-                    'Mar': 1,
-                    'Apr': 0
-                },
-                'Loan Product 3': {
-                    'Mar': 0,
-                    'Apr': 1
-                },
-                'Loan Product 4': {
-                    'Mar': 0
-                }
-            },
-            'Network 4': {
-                'Loan Product 1': {
-                    'Mar': 0
-                }
-            }
-        }
+        with open('data/Test_counts.json') as data_file:
+            expected = json.load(data_file)
 
         # When
         # We read the test data
@@ -125,67 +76,18 @@ class TestLoans(unittest.TestCase):
         The data/Test.csv file has been tweaked to duplicate the last line of data/Loans.csv so that we can demonstrate
         a total that is more than just the value of a single row.
 
-        As with test_count, this is coded based on the data in the test file. It could be made more adaptable because
-        currently you'd have to know to keep this code in sync with the test file and splitting the job between two
-        files is at best a drag and at worst creates an opportunity for error.
+        Similar to test_count, his test uses the expected values in Test_totals.json. It could be made more adaptable
+        because currently you'd have to know to keep the json in sync with the csv file. Splitting the job between
+        two files is at best a drag and at worst creates an opportunity for error, so it would be nice to move to a
+        neater solution.
         """
 
         # Given
         # A data file
         filename = "data/Test.csv"
         loanAggregator = loans.LoanAggregator()
-        expected = {
-            'Network 1': {
-                'Loan Product 1': {
-                    'Mar': 1000,
-                    'Apr': 0
-                },
-                'Loan Product 2': {
-                    'Mar': 3098,
-                    'Apr': 3000
-                },
-                'Loan Product 3': {
-                    'Mar': 0,
-                    'Apr': 0
-                }
-            },
-            'Network 2': {
-                'Loan Product 1': {
-                    'Mar': 1122,
-                    'Apr': 5671
-                },
-                'Loan Product 2': {
-                    'Mar': 0,
-                    'Apr': 0
-                },
-                'Loan Product 3': {
-                    'Mar': 0,
-                    'Apr': 1747
-                }
-            },
-            'Network 3': {
-                'Loan Product 1': {
-                    'Mar': 0,
-                    'Apr': 0
-                },
-                'Loan Product 2': {
-                    'Mar': 2084,
-                    'Apr': 0
-                },
-                'Loan Product 3': {
-                    'Mar': 0,
-                    'Apr': 1928
-                },
-                'Loan Product 4': {
-                    'Mar': 0
-                }
-            },
-            'Network 4': {
-                'Loan Product 1': {
-                    'Mar': 0
-                }
-            }
-        }
+        with open('data/Test_totals.json') as data_file:
+            expected = json.load(data_file)
 
         # When
         # We read the test data
