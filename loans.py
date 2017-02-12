@@ -132,9 +132,21 @@ class LoanAggregator:
 
 if __name__ == '__main__':
 
-    print("Data read:")
+    print("Data processed:")
+    print()
 
+    print("Json:")
     loanAggregator = LoanAggregator()
     loanAggregator.read_input("data/Loans.csv")
     print(json.dumps(loanAggregator.data))
+    print()
+
+    print("Results:")
+    for network in loanAggregator.data:
+        for product in loanAggregator.data[network]:
+            for month in loanAggregator.data[network][product]:
+                record = loanAggregator.data[network][product][month]
+                total = record["total"]
+                count = record["count"]
+                print(network + ", " + product + ", " + month + ": total=" + str(total) + " count=" + str(count))
 
