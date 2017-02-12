@@ -18,7 +18,7 @@ class TestLoans(unittest.TestCase):
         loanAggregator = loans.LoanAggregator()
 
         # When
-        # We instantiate the class
+        # We read the test data
         loanAggregator.read_input(filename)
 
         # Then
@@ -35,14 +35,84 @@ class TestLoans(unittest.TestCase):
         self.assertEqual(loanAggregator.amount, 4, "Incorrect Amount column index returned")
 
     def test_count(self):
-        # Given
+        """Checks that count values are correctly calculated.
 
+        This purposely checks a couple of non-existent values to ensure we don't get an error.
+
+        This test is coded based on the data in the test file. It could be made more adaptable because currently
+        you'd have to know to keep this code in sync with the test file and splitting the job between two files
+        is at best a drag and at worst creates an opportunity for error.
+        """
+
+        # Given
+        # A data file
+        filename = "data/Loans.csv"
+        loanAggregator = loans.LoanAggregator()
+        expected = {
+            'Network 1': {
+                'Loan Product 1': {
+                    'Mar': 1,
+                    'Apr': 0
+                },
+                'Loan Product 2': {
+                    'Mar': 0,
+                    'Apr': 1
+                },
+                'Loan Product 3': {
+                    'Mar': 0,
+                    'Apr': 0
+                }
+            },
+            'Network 2': {
+                'Loan Product 1': {
+                    'Mar': 1,
+                    'Apr': 1
+                },
+                'Loan Product 2': {
+                    'Mar': 0,
+                    'Apr': 0
+                },
+                'Loan Product 3': {
+                    'Mar': 0,
+                    'Apr': 1
+                }
+            },
+            'Network 3': {
+                'Loan Product 1': {
+                    'Mar': 0,
+                    'Apr': 0
+                },
+                'Loan Product 2': {
+                    'Mar': 1,
+                    'Apr': 0
+                },
+                'Loan Product 3': {
+                    'Mar': 0,
+                    'Apr': 1
+                },
+                'Loan Product 4': {
+                    'Mar': 0
+                }
+            },
+            'Network 4': {
+                'Loan Product 1': {
+                    'Mar': 0
+                }
+            }
+        }
 
         # When
+        # We read the test data
+        loanAggregator.read_input(filename)
 
         # Then
-
-        pass
+        # The counts should be as expected
+        for network in expected:
+            for product in expected[network]:
+                for month in expected[network][product]:
+                    count = loanAggregator.count(network, product, month)
+                    self.assertEqual(count, expected[network][product][month],
+                                     "Unexpected count: " + network + "/" + product + "/" + month + ": " + str(count))
 
     def test_stuff(self):
         # Given
