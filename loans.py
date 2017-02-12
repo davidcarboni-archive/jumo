@@ -135,6 +135,6 @@ if __name__ == '__main__':
     print("Data read:")
 
     loanAggregator = LoanAggregator()
-    loanAggregator.read_input("data/loans.csv")
+    loanAggregator.read_input("data/Loans.csv")
     print(json.dumps(loanAggregator.data))
 
