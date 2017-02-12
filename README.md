@@ -9,17 +9,31 @@ Python 3
 
     # git clone ...
 
-Using Python 3 (e.g. virtualenv or pyenv)is available
+Using Python 3 (e.g. virtualenv or pyenv):
     
+    # python loans.py
     
-    
-    # python3
+Or if Python 3 is available:
+
+    # python3 loans.py
 
 ## Assumptions
 
 CSV files are in the Excel "dialect"
 
 Error handling could be improved
+
+Assume headers are constant / reliable
+
+Date format is reliable - rather than parse the date, the month can be extracted as a substring, which may be sufficient
+
+## Language choice
+
+Java too heavy - too much boilerplate.
+
+Python good for what sholud be a relatively straightforward data processing task.
+
+For high performance / throughput particularly if concurrency is a consideration, consider Golang.
 
 ## Performance and sizing
 
